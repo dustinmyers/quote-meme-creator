@@ -18,10 +18,9 @@ function App() {
           <Sidebar setPhoto={setPhoto} photo={photo} />
           <main>
             <nav>
-              <Link to="/">Logo</Link>
               <div className="flex-spacer" />
-              <Link to="/meme-generator">Create</Link>
-              <Link to="/saved-memes">Saved Memes</Link>
+              {/* <Link to="/">Create</Link> */}
+              <Link to="/">Saved Memes</Link>
             </nav>
             <div className="flex-spacer" />
             <Switch>

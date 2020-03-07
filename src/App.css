@@ -33,6 +33,9 @@
 .flex-spacer {
   flex-grow: 1;
 }
+.logo {
+  margin: 0 auto;
+}
 nav {
   display: flex;
 }

@@ -4,6 +4,7 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { getQuote } from "../api/getQuote";
+import logo from "../assets/fox.png";
 
 export default function Sidebar(props) {
   const { textColor, textPosition, background } = useSelector(state => state);
@@ -100,6 +101,8 @@ export default function Sidebar(props) {
       <button onClick={() => props.setPhoto({ photo: props.photo.photo + 1 })}>
         New Photo
       </button>
+      <div className="flex-spacer" />
+      <img className="logo" src={logo} width="40" alt="fox logo" />
     </div>
   );
 }
