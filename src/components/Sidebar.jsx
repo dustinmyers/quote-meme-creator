@@ -7,7 +7,13 @@ import { getQuote } from "../api/getQuote";
 import logo from "../assets/fox.png";
 
 export default function Sidebar(props) {
-  const { textColor, textPosition, background } = useSelector(state => state);
+  const {
+    textColor,
+    textPosition,
+    background,
+    showAuthor,
+    quote
+  } = useSelector(state => state);
   const dispatch = useDispatch();
 
   const fetchQuote = async () => {
@@ -96,6 +102,29 @@ export default function Sidebar(props) {
           None{" "}
           {background === "none" && <FontAwesomeIcon icon={faCheckCircle} />}
         </p>
+      </div>
+      <div className="editor-section">
+        <h4 className="editor-header">Show Author</h4>
+        {quote.quoteAuthor ? (
+          <>
+            <p
+              onClick={() =>
+                dispatch({ type: "CHANGE_SHOW_AUTHOR", payload: true })
+              }
+            >
+              Show {showAuthor && <FontAwesomeIcon icon={faCheckCircle} />}
+            </p>
+            <p
+              onClick={() =>
+                dispatch({ type: "CHANGE_SHOW_AUTHOR", payload: false })
+              }
+            >
+              Hide {!showAuthor && <FontAwesomeIcon icon={faCheckCircle} />}
+            </p>
+          </>
+        ) : (
+          "No author found"
+        )}
       </div>
       <button onClick={fetchQuote}>New Quote</button>
       <button onClick={() => props.setPhoto({ photo: props.photo.photo + 1 })}>

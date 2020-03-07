@@ -15,9 +15,13 @@ function Home(props) {
     }
   }, [photoUrl]);
 
-  const { textColor, textPosition, background, quote } = useSelector(
-    state => state
-  );
+  const {
+    textColor,
+    textPosition,
+    background,
+    quote,
+    showAuthor
+  } = useSelector(state => state);
   const position = positionMap.get(textPosition);
   const color = colorMap.get(textColor);
   const backgroundColor = backgroundMap.get(background);
@@ -51,7 +55,7 @@ function Home(props) {
           style={{ bottom: position, color, backgroundColor }}
         >
           <h3>{quote.quoteText}</h3>
-          {quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
+          {showAuthor && quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
         </div>
       )}
     </section>

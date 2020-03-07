@@ -1,6 +1,7 @@
 const initialState = {
   background: "none",
   quote: "",
+  showAuthor: true,
   textColor: "light",
   textPosition: "top"
 };
@@ -26,6 +27,11 @@ export const memeReducer = (state = initialState, action) => {
       return {
         ...state,
         background: action.payload
+      };
+    case "CHANGE_SHOW_AUTHOR":
+      return {
+        ...state,
+        showAuthor: action.payload
       };
     default:
       return state;
