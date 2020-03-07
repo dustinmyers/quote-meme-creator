@@ -5,15 +5,15 @@ import { positionMap, colorMap, backgroundMap } from "../utils/maps";
 import { getQuote } from "../api/getQuote";
 
 function Home(props) {
-  const [showPhoto, setShowPhoto] = useState(true);
+  const [photoUrl, setPhotoUrl] = useState("https://picsum.photos/900/600.jpg");
   useEffect(() => {
-    setShowPhoto(false);
+    setPhotoUrl("");
   }, [props.photo]);
   useEffect(() => {
-    if (!showPhoto) {
-      setShowPhoto(true);
+    if (!photoUrl) {
+      setPhotoUrl("https://picsum.photos/900/600.jpg");
     }
-  }, [showPhoto]);
+  }, [photoUrl]);
 
   const { textColor, textPosition, background, quote } = useSelector(
     state => state
@@ -36,16 +36,16 @@ function Home(props) {
 
   return (
     <section className="meme">
-      {showPhoto && (
+      {photoUrl && (
         <img
           key={props.photo}
           className="meme-image"
-          src="https://picsum.photos/900/600.jpg"
+          src={photoUrl}
           alt="random photo from Unsplash"
           width="900"
         />
       )}
-      {showPhoto && (
+      {photoUrl && (
         <div
           className="quote-block"
           style={{ bottom: position, color, backgroundColor }}
@@ -54,7 +54,6 @@ function Home(props) {
           {quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
         </div>
       )}
-      {props.photo.photo} {showPhoto}
     </section>
   );
 }
