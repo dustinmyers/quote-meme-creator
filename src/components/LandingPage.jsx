@@ -5,15 +5,14 @@ import { positionMap, colorMap, backgroundMap } from "../utils/maps";
 import { getQuote } from "../api/getQuote";
 
 function Home(props) {
-  const [photoUrl, setPhotoUrl] = useState("https://picsum.photos/900/600.jpg");
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
+  const [imageUrl, setImageUrl] = useState(
+    `https://picsum.photos/900/600.jpg?random=${Math.random()}`
+  );
   useEffect(() => {
-    setPhotoUrl("");
+    setIsLoadingImage(true);
+    setImageUrl(`https://picsum.photos/900/600.jpg?random=${Math.random()}`);
   }, [props.photo]);
-  useEffect(() => {
-    if (!photoUrl) {
-      setPhotoUrl("https://picsum.photos/900/600.jpg");
-    }
-  }, [photoUrl]);
 
   const {
     textColor,
@@ -22,10 +21,12 @@ function Home(props) {
     quote,
     showAuthor
   } = useSelector(state => state);
+  const dispatch = useDispatch();
+
   const position = positionMap.get(textPosition);
   const color = colorMap.get(textColor);
   const backgroundColor = backgroundMap.get(background);
-  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchQuote = async () => {
       try {
@@ -40,24 +41,22 @@ function Home(props) {
 
   return (
     <section className="meme">
-      {photoUrl && (
-        <img
-          key={props.photo}
-          className="meme-image"
-          src={photoUrl}
-          alt="random photo from Unsplash"
-          width="900"
-        />
-      )}
-      {photoUrl && (
-        <div
-          className="quote-block"
-          style={{ bottom: position, color, backgroundColor }}
-        >
-          <h3>{quote.quoteText}</h3>
-          {showAuthor && quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
-        </div>
-      )}
+      <img
+        key={props.photo.photo}
+        className="meme-image"
+        src={imageUrl}
+        alt="random photo from Unsplash"
+        onLoad={() => setIsLoadingImage(false)}
+        width="900"
+      />
+
+      <div
+        className="quote-block"
+        style={{ ...position, color, backgroundColor }}
+      >
+        <h3>{quote.quoteText}</h3>
+        {showAuthor && quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
+      </div>
     </section>
   );
 }

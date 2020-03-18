@@ -1,7 +1,12 @@
 export const positionMap = new Map()
-  .set("top", "475px")
-  .set("center", "315px")
-  .set("bottom", "135px");
+  .set("top", { top: "16px" })
+  .set("center", {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    margin: "0"
+  })
+  .set("bottom", { bottom: "16px" });
 
 export const colorMap = new Map()
   .set("light", "#f2f2f2")

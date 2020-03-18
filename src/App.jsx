@@ -20,7 +20,7 @@ function App() {
             <nav>
               <div className="flex-spacer" />
               {/* <Link to="/">Create</Link> */}
-              <Link to="/">Saved Memes</Link>
+              {/* <Link to="/">Saved Memes</Link> */}
             </nav>
             <div className="flex-spacer" />
             <Switch>
