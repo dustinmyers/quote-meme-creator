@@ -38,7 +38,7 @@ function Home(props) {
   }, []);
 
   return (
-    <section className="meme">
+    <section className="meme" id="quote">
       {imageUrl && (
         <>
           <img
