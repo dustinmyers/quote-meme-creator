@@ -6,9 +6,7 @@ import { getQuote } from "../api/getQuote";
 
 function Home(props) {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
-  const [imageUrl, setImageUrl] = useState(
-    `https://picsum.photos/900/600.jpg?random=${Math.random()}`
-  );
+  const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
     setIsLoadingImage(true);
     setImageUrl(`https://picsum.photos/900/600.jpg?random=${Math.random()}`);
@@ -41,22 +39,26 @@ function Home(props) {
 
   return (
     <section className="meme">
-      <img
-        key={props.photo.photo}
-        className="meme-image"
-        src={imageUrl}
-        alt="random photo from Unsplash"
-        onLoad={() => setIsLoadingImage(false)}
-        width="900"
-      />
+      {imageUrl && (
+        <>
+          <img
+            key={props.photo.photo}
+            className="meme-image"
+            src={imageUrl}
+            alt="random photo from Unsplash"
+            onLoad={() => setIsLoadingImage(false)}
+            width="900"
+          />
 
-      <div
-        className="quote-block"
-        style={{ ...position, color, backgroundColor }}
-      >
-        <h3>{quote.quoteText}</h3>
-        {showAuthor && quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
-      </div>
+          <div
+            className="quote-block"
+            style={{ ...position, color, backgroundColor }}
+          >
+            <h3>{quote.quoteText}</h3>
+            {showAuthor && quote.quoteAuthor && <h3>- {quote.quoteAuthor}</h3>}
+          </div>
+        </>
+      )}
     </section>
   );
 }
